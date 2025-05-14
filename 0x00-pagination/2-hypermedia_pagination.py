@@ -47,6 +47,10 @@ class Server:
         return data[idex[0]:idex[1]]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        returns a dictionary containing the following key-value pairs.
+        page_size,data,next and prev page and total page
+        """
         total_data = len(self.dataset())
         total_pages = math.ceil(total_data / page_size) if page_size else 0
         hyper = {"page_size": page_size, "page": page,
