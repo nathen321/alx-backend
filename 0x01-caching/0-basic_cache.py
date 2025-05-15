@@ -11,16 +11,19 @@ class BasicCache(BaseCaching):
     '''A class `BasicCache` that inherits from `BaseCaching`
        and is a caching system
     '''
+    def __init__(self):
+        """ Initiliaze
+        """
+        super().__init__()
 
     def put(self, key, item):
-        '''assign to the dictionary `self.cache_data` the
-           `item` value for the key `key`
-        '''
+        """ Add an item in the cache
+        """
         if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
-        '''return the value in `self.cache_data` linked to `key`
-        '''
-
-        return self.cache_data.get(key, None)
+        """ Get an item by key
+        """
+        if key in self.cache_data.keys() and key is not None:
+            return self.cache_data[key]
