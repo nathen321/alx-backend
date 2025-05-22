@@ -36,13 +36,16 @@ def get_locale() -> str:
     Returns:
         str: best match
     """
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
     user = get_user()
     if user:
         if user.get('locale'):
             return user.get('locale')
-    locale = request.args.get('locale')
-    if locale in app.config['LANGUAGES']:
-        return locale
+    header_locale = request.headers.get('locale', '')
+    if header_locale in app.config["LANGUAGES"]:
+        return header_locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
