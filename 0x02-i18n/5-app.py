@@ -49,24 +49,23 @@ def index() -> str:
     Returns:
         html: homepage
     '''
-    return render_template("4-index.html")
+    return render_template("5-index.html")
 
 
 @app.before_request
 def before_request():
     ''' user login system is outside the scope of this project.
     '''
-    user = get_user
-    g.user(user)
+    g.user = get_user()
 
 
 def get_user():
     '''retreave user
     '''
     user = request.args.get('login_as')
-    if user not in users:
-        return None
-    return user
+    if user:
+        return users.get(int(user))
+    return None
 
 
 if __name__ == '__main__':
