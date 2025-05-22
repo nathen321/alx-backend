@@ -26,3 +26,11 @@ msgstr "Bienvenue chez ALX"
 msgid "home_header"
 msgstr "Bonjour monde!"
 
+#: templates/4-index.html:4
+msgid "home_title"
+msgstr "Bienvenue chez ALX"
+
+#: templates/4-index.html:7
+msgid "home_header"
+msgstr "Bonjour monde!"
+
