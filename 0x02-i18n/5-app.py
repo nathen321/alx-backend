@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-'''Task 4: Force locale with URL parameter
+'''Task 5: Force locale with URL parameter
 '''
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
 
@@ -13,6 +13,14 @@ class Config:
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+users = {
+    1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
+    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+    3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
+    4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
+}
 
 
 app = Flask(__name__)
@@ -42,6 +50,23 @@ def index() -> str:
         html: homepage
     '''
     return render_template("4-index.html")
+
+
+@app.before_request
+def before_request():
+    ''' user login system is outside the scope of this project.
+    '''
+    user = get_user
+    g.user(user)
+
+
+def get_user():
+    '''retreave user
+    '''
+    user = request.args.get('login_as')
+    if user not in users:
+        return None
+    return user
 
 
 if __name__ == '__main__':
